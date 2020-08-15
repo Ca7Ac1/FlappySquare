@@ -24,7 +24,7 @@ public class Game extends JPanel implements ActionListener {
     private final int WIDTH = 1400;
     private final int HEIGHT = 600;
 
-    private final int FONT_SIZE = 20;
+    private final int FONT_SIZE = 40;
 
     private final int PIPE_WIDTH = 75;
 
