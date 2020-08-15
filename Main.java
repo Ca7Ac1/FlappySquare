@@ -6,7 +6,7 @@ public class Main {
     public Main() {
         JFrame frame = new JFrame("Flappy Square");
 
-        frame.add(new Game());
+        frame.add(new Game(frame));
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
