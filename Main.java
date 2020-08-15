@@ -4,7 +4,7 @@ import java.awt.EventQueue;
 public class Main {
     
     public Main() {
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Flappy Square");
 
         frame.add(new Game());
         frame.pack();

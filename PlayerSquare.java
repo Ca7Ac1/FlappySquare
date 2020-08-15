@@ -8,20 +8,25 @@ public class PlayerSquare {
     private final int WIDTH;
     private final int HEIGHT;
 
+    private final int Y_BUFFER = 3;
+    private final int JUMP_HEIGHT = 8;
+
     private final int squareSize = 40;
 
-    private final int xPos;
+    private int xPos;
     private int yPos;
 
     private int yChange;
+    private int yChangeCounter;
 
     public PlayerSquare(int width, int height) {
         WIDTH = width;
         HEIGHT = height;
-        
-        xPos = width / 8;
+
+        xPos = width / 10;
         yPos = height / 2;
         yChange = 0;
+        yChangeCounter = 0;
     }
 
     public void draw(Graphics g) {
@@ -36,25 +41,29 @@ public class PlayerSquare {
     }
 
     public void jump() {
-        yChange = 10;
+        yChange = JUMP_HEIGHT;
     }
 
     public void update() {
         yPos -= yChange;
-        yChange -= 1;
+
+        if (yChangeCounter >= Y_BUFFER || yChange > JUMP_HEIGHT - 3) {
+            yChange -= 1;
+            yChangeCounter = 0;
+        }
+
+        yChangeCounter++;
     }
 
-    public boolean checkDeath() {
-        if (yPos >= HEIGHT - squareSize) {
+    public boolean checkDeath(Pipe pipe) {
+        if (yPos >= HEIGHT - squareSize || yPos <= 0) {
             return true;
         }
 
-        if (yPos <= 0) {
+        if (getHitbox().intersects(pipe.getUpperHitbox()) || getHitbox().intersects(pipe.getLowerHitbox())) {
             return true;
         }
 
         return false;
     }
 }
-
-
